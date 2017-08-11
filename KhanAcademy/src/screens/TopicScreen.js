@@ -8,8 +8,7 @@ import {
     Image,
     FlatList,
     NavigatorIOS, 
-    TouchableHighlight,
-    Button
+    TouchableHighlight
     } from 'react-native';
 
 import Detail from './DetailScreen.js'
@@ -36,16 +35,10 @@ export class Topic extends React.Component {
     constructor() {
         super()
         this.state = {
-            data: []
+            data: [],
         }
     }
     
-    onNext() {
-        this.props.navigator.push ({
-            component: Detail,
-            title: 'Detail'
-        })
-    }
     onNextScreen = (data) => {
         this.props.navigator.push({
             component: Detail,
@@ -72,12 +65,20 @@ export class Topic extends React.Component {
 
     render(){
         return (
-        <View> 
-            <FlatList
+        <View style = {{flex:1}}> 
+            {/* <FlatList
                 data = {this.state.data}
                 keyExtractor = {(x, i) => i}
                 renderItem = {({item})=> 
                     this.renderVideoCell(item)
+                }
+                ItemSeparatorComponent = {this.renderSaperator}
+            /> */}
+            <FlatList 
+                data = {this.state.children}
+                keyExtractor = {(x, i) => i}
+                renderItem = {({item})=> 
+                    this.renderCellHorizontal(item)
                 }
                 ItemSeparatorComponent = {this.renderSaperator}
             />
@@ -92,14 +93,30 @@ export class Topic extends React.Component {
                     style={styles.imageCell}
                     source = {{uri: item.download_urls.png}}
                 />
-                <View style = {styles.cell}> 
+                {/* <View style = {styles.cell}> 
                     <Text style={{flex:1, flexWrap: 'wrap'}}> {item.title} </Text>
-                </View>
+                </View> */}
             </View>
             </TouchableHighlight>
         )
     }
 
+    renderCellHorizontal(item) {
+        console.log(this.state.data)
+        return (
+            <View style = {styles.cellHorizontal}>
+                <FlatList
+                style = {{marginTop: 10, flex:1}}
+                horizontal
+                data = {this.state.data}
+                keyExtractor = {(x, i) => i}
+                renderItem = {({item})=>
+                    this.renderVideoCell(item)
+                }
+            />
+            </View>
+        )
+    }
     renderSaperator() {
         return (
             <View 
@@ -127,6 +144,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         //justifyContent: 'center',
+        margin: 10
+    },
+
+    cellHorizontal: {
+        flex: 1,
+        flexDirection: 'row',
+        //alignItems: 'center',
+        //justifyContent: 'center',
+        height: 50,
         margin: 10
     },
 

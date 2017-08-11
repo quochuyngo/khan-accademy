@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-import NavigatorApp from './src/screens/TopicScreen.js'
+import NavigatorApp from './src/screens/ExploreScreen.js'
 export default class KhanAcademy extends Component {
   render() {
     return (
