@@ -9,7 +9,8 @@ import {
     FlatList,
     ScrollView,
     NavigatorIOS,
-    TouchableHighlight
+    TouchableHighlight,
+    Dimensions
 } from 'react-native';
 
 import TopicCard from '../components/TopicCard.js'
@@ -129,7 +130,7 @@ export class Explore extends React.Component {
             <View style={{ flex: 1 }}>
                 <ScrollView>
                     <View>
-                        <Image style = {{height: 160, marginBottom: 10}}
+                        <Image style = {styles.cover}
                             source = {require("../../assets/images/cover1.jpg")}
                             resizeMode = 'cover'/>
                         <Text style = {styles.subjectTitle}> {this.state.subjects[0].name} </Text>
@@ -205,22 +206,6 @@ export class Explore extends React.Component {
             <TopicCard item = {item} subjectScreen = {this.onNextScreen}/>
         )
     }
-
-    // renderCell(item) {
-    //     return (
-    //         //<TouchableHighlight onPress={() => {this.onNextScreen(item)}}>
-    //         <View style={styles.cell}> 
-    //              <Image 
-    //                 style={styles.imageCell}
-    //                 source = {{uri: `${item.icon}`}}
-    //             /> 
-    //             <View style = {{flex:1}}> 
-    //                  <Text style = {styles.topicTitle}>{item.translated_title}</Text>
-    //             </View>
-    //         </View>
-    //         //</TouchableHighlight>
-    //     )
-    // }
 }
 
 const styles = StyleSheet.create({
@@ -243,9 +228,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 6
     },
-    canvas: {
-        margin: 0,
-        height: 160
+    
+    cover: {
+        marginBottom: 10,
+        height: 168,
+        width: Dimensions.get("window").width
     },
 
     info: {

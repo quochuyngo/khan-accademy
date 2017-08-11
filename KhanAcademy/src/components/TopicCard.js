@@ -20,10 +20,10 @@ const TopicCard = ({ item, subjectScreen}) => (
 	</TouchableOpacity>
 );
 
-TopicCard.propTypes = {
-	info: PropTypes.object.isRequired,
-	subjectScreen: PropTypes.func.isRequired
-};
+// TopicCard.propTypes = {
+// 	info: PropTypes.object.isRequired,
+// 	subjectScreen: PropTypes.func.isRequired
+// };
 
 const styles = StyleSheet.create({
 	cardContainer: {
