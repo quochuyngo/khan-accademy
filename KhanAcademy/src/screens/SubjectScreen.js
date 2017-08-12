@@ -10,7 +10,7 @@ import {
   Dimensions
 } from 'react-native';
 
-import Detail from './DetailScreen'
+import Lesson from './LessonScreen'
 export default class Subject extends React.Component {
     constructor() {
         super()
@@ -22,7 +22,7 @@ export default class Subject extends React.Component {
 
     onNextScreen = (data) => {
         this.props.navigator.push({
-            component: Detail,
+            component: Lesson,
             title: `${data.translated_title}`,
             passProps: {
                 data: data
@@ -69,7 +69,7 @@ export default class Subject extends React.Component {
             <TouchableOpacity activeOpacity={0.8} onPress={() => {this.onNextScreen(item)}}>
             <View style = {styles.container}> 
                 <Image style = {{height: 30, width: 30, borderRadius: 15}}
-                    source = {{uri: item.icon?item.icon:require("../../assets/images/cover1.jpg")}}
+                    source = {{uri: item.icon}}
                 />
                 <View style = {styles.container}>
                     <Text style = {styles.title} >{item.translated_title}</Text>

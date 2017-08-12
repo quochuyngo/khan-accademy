@@ -23,8 +23,8 @@ export default class Deatail extends React.Component {
         if (showVideoPlayer) {
             return (
                 <VideoPlayer
-                 //video={{uri: this.props.data.download_urls.mp4}}
-                 video = {{uri: 'https://cdn.kastatic.org/KA-youtube-converted/5FEjrStgcF8.mp4/5FEjrStgcF8.mp4'}}
+                 video={{uri: this.props.data.download_urls.mp4}}
+                 //video = {{uri: 'https://cdn.kastatic.org/KA-youtube-converted/5FEjrStgcF8.mp4/5FEjrStgcF8.mp4'}}
                  volume={0.5} 
                  onClosePressed={this.onClosePressed.bind(this)}/>
             );
