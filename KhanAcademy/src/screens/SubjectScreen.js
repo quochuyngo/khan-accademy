@@ -29,6 +29,15 @@ export default class Subject extends React.Component {
             }
         })
     }
+
+    titleStyle = (topic_slug) => {
+        return {
+            flexWrap: 'wrap', 
+            fontSize: 12, 
+            color: subjectColor[topic_slug],
+            fontWeight: '500'
+        }
+    }
     getSubjects(item) {
          return fetch(`http://www.khanacademy.org/api/v1/topic/${item.node_slug}`)
         .then((response) => response.json())
@@ -72,7 +81,7 @@ export default class Subject extends React.Component {
                     source = {{uri: item.icon}}
                 />
                 <View style = {styles.container}>
-                    <Text style = {styles.title} >{item.translated_title}</Text>
+                    <Text style = {this.titleStyle(this.props.topic)} >{item.translated_title}</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -102,3 +111,10 @@ const styles = {
         fontWeight: 'bold'
     }
 }
+
+const subjectColor = { 'science': '#c9347c',  
+                            'math': '#12adcc', 
+                            'economics-finance-domain': '#de7b12', 
+                            'humanities': '#be2612',
+                            'computing': '#20ab53'
+                        }

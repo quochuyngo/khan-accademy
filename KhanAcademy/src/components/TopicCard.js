@@ -7,8 +7,8 @@ import {
     StyleSheet
 } from 'react-native';
 
-const TopicCard = ({ item, subjectScreen}) => (
-	<TouchableOpacity activeOpacity={0.8} onPress = {subjectScreen.bind(this, item)}>
+const TopicCard = ({ item, topic, subjectScreen}) => (
+	<TouchableOpacity activeOpacity={0.8} onPress = {subjectScreen.bind(this, item, topic)}>
 		<View style={styles.cardContainer}>
 			<Image resizeMode = 'stretch' source={{ uri: `${item.icon}`}} style={styles.cardImage} />
 			<View style={styles.cardTitleContainer}>

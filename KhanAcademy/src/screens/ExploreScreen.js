@@ -35,22 +35,23 @@ export class Explore extends React.Component {
         super()
         this.state = {
             subjects:
-            [{ name: 'Science', slug: 'science', data: [] },
-            { name: 'Math', slug: 'math', data: [] },
-            { name: 'Economics and finance', slug: 'economics-finance-domain', data: [] },
-            { name: 'Arts and humanities', slug: 'humanities', data: [] },
-            { name: 'Computing', slug: 'computing', data: [] }
+            [{ name: 'Science', slug: 'science', data: [{}] },
+            { name: 'Math', slug: 'math', data: [{}] },
+            { name: 'Economics and finance', slug: 'economics-finance-domain', data: [{}] },
+            { name: 'Arts and humanities', slug: 'humanities', data: [{}] },
+            { name: 'Computing', slug: 'computing', data: [{}] }
             ],
         }
         this.onNextScreen = this.onNextScreen.bind(this)
     }
 
-    onNextScreen = (data) => {
+    onNextScreen = (data, topic) => {
         this.props.navigator.push({
             component: Subject,
             title: `${data.translated_title}`,
             passProps: {
-                data: data
+                data: data,
+                topic: topic  
             }
         })
     }
@@ -95,7 +96,7 @@ export class Explore extends React.Component {
                                     data={subject.data}
                                     keyExtractor={(x, i) => i}
                                     renderItem={({ item }) =>
-                                        this.renderCell(item)
+                                        this.renderCell(item, subject.slug)
                                     }
                                 />
                                 <View style = {{backgroundColor: '#eeecec', height: 0.5, marginBottom:14}}></View>
@@ -107,9 +108,9 @@ export class Explore extends React.Component {
         )
     }
 
-    renderCell(item) {
+    renderCell(item, topic) {
         return (
-            <TopicCard item={item} subjectScreen={this.onNextScreen} />
+            <TopicCard item={item} topic = {topic} subjectScreen={this.onNextScreen} />
         )
     }
 }
@@ -117,7 +118,7 @@ export class Explore extends React.Component {
 const styles = StyleSheet.create({
     subjectTitle: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: '600',
         marginLeft: 6
     },
 
