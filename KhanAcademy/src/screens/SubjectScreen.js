@@ -29,6 +29,44 @@ export default class Subject extends React.Component {
             }
         })
     }
+
+    titleStyle = (topic_slug) => {
+        return {
+            flexWrap: 'wrap', 
+            fontSize: 12, 
+            color: subjectColor[topic_slug],
+            fontWeight: '500'
+        }
+    }
+
+    coverViewStyle = (topic_slug) => {
+        return {
+            marginTop: 64,
+            backgroundColor: subjectColor[topic_slug],
+            marginBottom: 0,
+            height: 168,
+            width: Dimensions.get("window").width,
+            alignItems: 'center',
+            justifyContent: 'center'
+        }
+    }
+
+    coverImageStyle = (topic_slug) => {
+        if (topic_slug == 'humanities') {
+            return {
+                 height: 168,
+                 width: Dimensions.get("window").width
+            }
+        } else {
+            return {
+                height: 160,
+                width: 160,
+            }
+        }
+    }
+
+    
+
     getSubjects(item) {
          return fetch(`http://www.khanacademy.org/api/v1/topic/${item.node_slug}`)
         .then((response) => response.json())
@@ -44,12 +82,16 @@ export default class Subject extends React.Component {
         this.getSubjects(this.props.data)
     }
     render() {
+        let topic = this.props.topic
         return (
-            <View style = {{flex:1, marginTop: 64}}>
-                <Image style = {styles.cover}
-                  source = {{uri: this.props.data.icon}}
-                  resizeMode = 'cover'//'stretch'
+            <View style = {{flex:1}}>
+                <View style = {this.coverViewStyle(topic)}>
+                    <Image style = {this.coverImageStyle(topic)}
+                    source = {{uri: this.props.data.icon}}
+                    resizeMode = 'stretch'//'stretch'
                 />
+                </View>
+
                 <View style = {{flex:1}} >
                     <FlatList
                         automaticallyAdjustContentInsets = {false} 
@@ -68,11 +110,11 @@ export default class Subject extends React.Component {
         return (
             <TouchableOpacity activeOpacity={0.8} onPress={() => {this.onNextScreen(item)}}>
             <View style = {styles.container}> 
-                <Image style = {{height: 30, width: 30, borderRadius: 15}}
+                <Image style = {{height: 34, width: 34, borderRadius: 17}}
                     source = {{uri: item.icon}}
                 />
                 <View style = {styles.container}>
-                    <Text style = {styles.title} >{item.translated_title}</Text>
+                    <Text style = {this.titleStyle(this.props.topic)} >{item.translated_title}</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -90,11 +132,6 @@ const styles = {
         marginLeft: 14,
         marginRight: 14
     },
-    cover: {
-        marginBottom: 0,
-        height: 168,
-        width: Dimensions.get("window").width
-    },
     title: {
         flexWrap: 'wrap', 
         fontSize:12, 
@@ -102,3 +139,10 @@ const styles = {
         fontWeight: 'bold'
     }
 }
+
+const subjectColor = { 'science': '#c9347c',  
+                            'math': '#12adcc', 
+                            'economics-finance-domain': '#de7b12', 
+                            'humanities': '#be2612',
+                            'computing': '#20ab53'
+                        }

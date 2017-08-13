@@ -16,7 +16,8 @@ export default class Lesson extends React.Component {
     super()
     this.state = {
       data: [],
-      lessonVideos: []
+      lessonVideos: [],
+      example: []
     }
   }
 
@@ -47,11 +48,8 @@ export default class Lesson extends React.Component {
     return fetch(`http://www.khanacademy.org/api/v1/topic/${item.node_slug}/videos`)
       .then((response) => response.json())
       .then((responseJson) => {
-          let {lessonVideos} = this.state
-          lessonVideos = responseJson
-          //lessonVideos.concat(responseJson)
-          //console.log(responseJson)
-          this.setState({lessonVideos: lessonVideos})
+          var newLessonVideos = this.state.lessonVideos.concat(responseJson)
+          this.setState({lessonVideos: newLessonVideos})
       })
       .catch((error) => {
         console.error(error)
