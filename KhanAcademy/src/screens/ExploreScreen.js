@@ -98,6 +98,7 @@ export class Explore extends React.Component {
                                         this.renderCell(item)
                                     }
                                 />
+                                <View style = {{backgroundColor: '#eeecec', height: 0.5, marginBottom:14}}></View>
                             </View>
                         )
                     })}
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
 
     cover: {
         marginBottom: 10,
-        height: 168,
+        height: 176,
         width: Dimensions.get("window").width
     },
 });

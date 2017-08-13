@@ -68,7 +68,7 @@ export default class Subject extends React.Component {
         return (
             <TouchableOpacity activeOpacity={0.8} onPress={() => {this.onNextScreen(item)}}>
             <View style = {styles.container}> 
-                <Image style = {{height: 30, width: 30, borderRadius: 15}}
+                <Image style = {{height: 34, width: 34, borderRadius: 17}}
                     source = {{uri: item.icon}}
                 />
                 <View style = {styles.container}>
