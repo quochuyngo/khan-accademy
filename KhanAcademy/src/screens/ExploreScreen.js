@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
 
     cover: {
         marginBottom: 10,
-        height: 176,
+        height: 168,
         width: Dimensions.get("window").width
     },
 });

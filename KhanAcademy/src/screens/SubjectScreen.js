@@ -38,6 +38,35 @@ export default class Subject extends React.Component {
             fontWeight: '500'
         }
     }
+
+    coverViewStyle = (topic_slug) => {
+        return {
+            marginTop: 64,
+            backgroundColor: subjectColor[topic_slug],
+            marginBottom: 0,
+            height: 168,
+            width: Dimensions.get("window").width,
+            alignItems: 'center',
+            justifyContent: 'center'
+        }
+    }
+
+    coverImageStyle = (topic_slug) => {
+        if (topic_slug == 'humanities') {
+            return {
+                 height: 168,
+                 width: Dimensions.get("window").width
+            }
+        } else {
+            return {
+                height: 160,
+                width: 160,
+            }
+        }
+    }
+
+    
+
     getSubjects(item) {
          return fetch(`http://www.khanacademy.org/api/v1/topic/${item.node_slug}`)
         .then((response) => response.json())
@@ -53,12 +82,16 @@ export default class Subject extends React.Component {
         this.getSubjects(this.props.data)
     }
     render() {
+        let topic = this.props.topic
         return (
-            <View style = {{flex:1, marginTop: 64}}>
-                <Image style = {styles.cover}
-                  source = {{uri: this.props.data.icon}}
-                  resizeMode = 'cover'//'stretch'
+            <View style = {{flex:1}}>
+                <View style = {this.coverViewStyle(topic)}>
+                    <Image style = {this.coverImageStyle(topic)}
+                    source = {{uri: this.props.data.icon}}
+                    resizeMode = 'stretch'//'stretch'
                 />
+                </View>
+
                 <View style = {{flex:1}} >
                     <FlatList
                         automaticallyAdjustContentInsets = {false} 
@@ -98,11 +131,6 @@ const styles = {
         marginBottom: 10,
         marginLeft: 14,
         marginRight: 14
-    },
-    cover: {
-        marginBottom: 0,
-        height: 168,
-        width: Dimensions.get("window").width
     },
     title: {
         flexWrap: 'wrap', 
